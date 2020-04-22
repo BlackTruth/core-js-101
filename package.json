@@ -11,11 +11,14 @@
   "devDependencies": {
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-import": "^2.20.2",
     "mocha": "^6.2.2"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/mikhama/core-js-101.git"
+  },
+  "dependencies": {
+    "eslint-config-prettier": "^6.11.0"
   }
 }
