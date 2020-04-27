@@ -12,7 +12,8 @@
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.2",
-    "mocha": "^6.2.2"
+    "mocha": "^6.2.2",
+    "prettier-eslint": "^9.0.1"
   },
   "repository": {
     "type": "git",
