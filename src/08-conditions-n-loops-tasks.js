@@ -354,8 +354,25 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const stack = [];
+  str.split('').forEach(elem => {
+    const last = stack[stack.length - 1];
+    stack.push(elem);
+    if (
+      (last === '[' && elem === ']') ||
+      (last === '{' && elem === '}') ||
+      (last === '(' && elem === ')') ||
+      (last === '<' && elem === '>')
+    ) {
+      stack.splice(stack.length - 2, 2);
+    }
+  });
+
+  if (stack.length === 0) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -378,8 +395,18 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(...args) {
+  let result = [];
+  if (args[2]) {
+    result = [...args[2]];
+  }
+  const newNum = Math.trunc(args[0] / args[1]);
+  result.push(args[0] % args[1]);
+  if (newNum < args[1]) {
+    result.push(newNum);
+    return result.reverse().join('');
+  }
+  return toNaryString(newNum, args[1], result);
 }
 
 /**
@@ -394,8 +421,29 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  let [buf] = pathes;
+  buf = [...buf];
+  for (let i = 1; i < pathes.length; i += 1) {
+    const elArr = pathes[i].split('');
+    elArr.forEach((el, ind) => {
+      let indToDel = null;
+      if (el !== buf[ind] && buf[ind]) {
+        if (el === '/' || buf[ind] === '/') {
+          indToDel = ind;
+          buf.splice(indToDel, buf.length - indToDel);
+        }
+        for (let j = buf.length - 1; j >= 0; j -= 1) {
+          if (buf[j] === '/' && ind > j) {
+            indToDel = j + 1;
+            break;
+          }
+        }
+        buf.splice(indToDel, buf.length - indToDel);
+      }
+    });
+  }
+  return buf.join('');
 }
 
 /**
