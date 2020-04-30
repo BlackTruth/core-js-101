@@ -124,7 +124,7 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-  return str.replace(value, "");
+  return str.replace(value, '');
 }
 
 /**
@@ -139,7 +139,7 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-  return str.replace(">", "").replace("<", "");
+  return str.replace('>', '').replace('<', '');
 }
 
 /**
@@ -172,7 +172,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-  return str.split(";");
+  return str.split(';');
 }
 
 /**
@@ -200,8 +200,8 @@ function extractEmails(str) {
  */
 function getRectangleString(width, height) {
   return (
-    `┌${"─".repeat(width - 2)}┐\n` +
-    `${`│${" ".repeat(width - 2)}│\n`.repeat(height - 2)}└${"─".repeat(
+    `┌${'─'.repeat(width - 2)}┐\n` +
+    `${`│${' '.repeat(width - 2)}│\n`.repeat(height - 2)}└${'─'.repeat(
       width - 2
     )}┘\n`
   );
@@ -227,8 +227,8 @@ function getRectangleString(width, height) {
 function encodeToRot13(str) {
   const toChar = String.fromCharCode;
   return str
-    .split("")
-    .map((el) => {
+    .split('')
+    .map(el => {
       const charCode = el.charCodeAt();
       if (
         (charCode > 77 && charCode < 91) ||
@@ -239,7 +239,7 @@ function encodeToRot13(str) {
         return toChar(charCode + 13);
       return toChar(charCode);
     })
-    .join("");
+    .join('');
 }
 
 /**
@@ -256,7 +256,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-  return typeof value === "string" || value instanceof String;
+  return typeof value === 'string' || value instanceof String;
 }
 
 /**
@@ -284,12 +284,27 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-  const cardArr = ['A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣',
-    'A♦','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','Q♦','K♦',
-    'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥',
-    'A♠','2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','Q♠','K♠'];
-    return cardArr.indexOf(value);
-    // return [ 'черви', 'бубны', 'пики', 'крести'].indexOf(value.substring(value.length-1)) * 13 + parseInt(value.substring(0,value.length-1)); 
+  const cardValues = [
+    'A',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    'J',
+    'Q',
+    'K'
+  ];
+  const cardTypes = ['♣', '♦', '♥', '♠'];
+  const type = value[value.length - 1];
+  const number = value.replace(type, '');
+  return (
+    cardValues.indexOf(number) + cardTypes.indexOf(type) * cardValues.length
+  );
 }
 
 module.exports = {
@@ -307,5 +322,5 @@ module.exports = {
   getRectangleString,
   encodeToRot13,
   isString,
-  getCardId,
+  getCardId
 };

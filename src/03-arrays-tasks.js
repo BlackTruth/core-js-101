@@ -620,12 +620,11 @@ function swapHeadAndTail(arr) {
   const len = arr.length;
   if (len === 1) return arr;
   const center = Math.floor((len + 1) / 2);
-  return arr.map((el, ind) => {
-    if (ind < center - 1) return arr[ind + center];
-    if (ind > center - 1) return arr[ind - center];
-    if (len % 2 !== 0) return el;
-    return arr[ind + center];
-  });
+  const end = arr.splice(center, center);
+  const cElement = len % 2 === 1 ? arr.splice(center - 1, 1) : [];
+  const begin = arr.splice(0, arr.length);
+  arr.push(...end, ...cElement, ...begin);
+  return arr;
 }
 
 module.exports = {

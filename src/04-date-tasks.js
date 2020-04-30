@@ -78,7 +78,7 @@ function timeSpanToString(startDate, endDate) {
   function leadZero(number, count) {
     const sNum = `${number}`;
     return sNum.length < count
-      ? `${new Array(count - sNum.length).fill(0).join('')}${sNum}`
+      ? `${'0'.repeat(count - sNum.length)}${sNum}`
       : sNum;
   }
 
@@ -112,9 +112,9 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-  const min = date.getUTCMinutes() * 360 / 60;
-  const hour = ((date.getUTCHours() % 12) * 360 +  min) / 12;
-  const dif = Math.abs(hour - min) * 2 * Math.PI / 360;
+  const min = (date.getUTCMinutes() * 360) / 60;
+  const hour = ((date.getUTCHours() % 12) * 360 + min) / 12;
+  const dif = (Math.abs(hour - min) * 2 * Math.PI) / 360;
   if (dif < Math.PI) return dif;
   return Math.PI * 2 - dif;
 }

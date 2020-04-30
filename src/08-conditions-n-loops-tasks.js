@@ -514,8 +514,50 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  let winner = null;
+  let winnerReverse = null;
+  let isWinner = true;
+  let isWinnerReverse = true;
+  for (let i = 0; i < 3; i += 1) {
+    if (winner === null) {
+      winner = position[i][i];
+      if (winner === undefined) isWinner = false;
+    } else if (winner !== position[i][i]) {
+      isWinner = false;
+    }
+    if (winnerReverse === null) {
+      winnerReverse = position[2 - i][i];
+      if (winnerReverse === undefined) isWinnerReverse = false;
+    } else if (winnerReverse !== position[2 - i][i]) {
+      isWinnerReverse = false;
+    }
+  }
+  if (isWinner) return winner;
+  if (isWinnerReverse) return winnerReverse;
+  for (let i = 0; i < 3; i += 1) {
+    let w = null;
+    let wReverse = null;
+    let isW = true;
+    let isWReverse = true;
+    for (let j = 0; j < 3; j += 1) {
+      if (w === null) {
+        w = position[i][j];
+        if (w === undefined) isW = false;
+      } else if (w !== position[i][j]) {
+        isW = false;
+      }
+      if (wReverse === null) {
+        wReverse = position[j][i];
+        if (wReverse === undefined) isWReverse = false;
+      } else if (wReverse !== position[j][i]) {
+        isWReverse = false;
+      }
+    }
+    if (isW) return w;
+    if (isWReverse) return wReverse;
+  }
+  return undefined;
 }
 
 module.exports = {
