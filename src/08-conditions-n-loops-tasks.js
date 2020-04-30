@@ -127,8 +127,8 @@ function isTriangle(a, b, c) {
  */
 function doRectanglesOverlap(rect1, rect2) {
   if (
-    rect1.top + rect1.height >= rect2.top &&
-    rect1.left + rect1.width >= rect2.left
+    rect1.top + rect1.height >= rect2.top
+    && rect1.left + rect1.width >= rect2.left
   ) {
     return true;
   }
@@ -165,11 +165,11 @@ function isInsideCircle(circle, point) {
   const newPointX = Math.abs(point.x - circle.center.x);
   const newPointY = Math.abs(point.y - circle.center.y);
   if (
-    (!newPointX && circle.radius > newPointY) ||
-    (!newPointY && circle.radius > newPointX) ||
-    (circle.radius > Math.sqrt(newPointX ** 2 + newPointY ** 2) &&
-      newPointX &&
-      newPointY)
+    (!newPointX && circle.radius > newPointY)
+    || (!newPointY && circle.radius > newPointX)
+    || (circle.radius > Math.sqrt(newPointX ** 2 + newPointY ** 2)
+      && newPointX
+      && newPointY)
   ) {
     return true;
   }
@@ -194,8 +194,8 @@ function findFirstSingleChar(str) {
   const sortedStr = str.split('').sort();
   for (let i = 0; i < sortedStr.length - 1; i += 1) {
     if (
-      sortedStr[i] !== sortedStr[i + 1] &&
-      sortedStr[i + 1] !== sortedStr[i + 2]
+      sortedStr[i] !== sortedStr[i + 1]
+      && sortedStr[i + 1] !== sortedStr[i + 2]
     ) {
       return sortedStr[i + 1];
     }
@@ -327,9 +327,7 @@ function getDigitalRoot(num) {
     num
       .toString()
       .split('')
-      .reduce((result, el) => {
-        return +el + result;
-      }, 0)
+      .reduce((result, el) => +el + result, 0),
   );
 }
 
@@ -356,14 +354,14 @@ function getDigitalRoot(num) {
  */
 function isBracketsBalanced(str) {
   const stack = [];
-  str.split('').forEach(elem => {
+  str.split('').forEach((elem) => {
     const last = stack[stack.length - 1];
     stack.push(elem);
     if (
-      (last === '[' && elem === ']') ||
-      (last === '{' && elem === '}') ||
-      (last === '(' && elem === ')') ||
-      (last === '<' && elem === '>')
+      (last === '[' && elem === ']')
+      || (last === '{' && elem === '}')
+      || (last === '(' && elem === ')')
+      || (last === '<' && elem === '>')
     ) {
       stack.splice(stack.length - 2, 2);
     }
@@ -577,5 +575,5 @@ module.exports = {
   toNaryString,
   getCommonDirectoryPath,
   getMatrixProduct,
-  evaluateTicTacToePosition
+  evaluateTicTacToePosition,
 };

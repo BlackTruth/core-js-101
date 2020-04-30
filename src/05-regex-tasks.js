@@ -77,7 +77,7 @@ function getRegexForPitSpot() {
  */
 function getPasswordValidator(minLength) {
   const reg = new RegExp(
-    `^(?=(?:.*[A-Z]){1,})(?=(?:.*[a-z]){1,})(?=(?:.*[0-9]){1,})([A-Za-z0-9]{${minLength},})$`
+    `^(?=(?:.*[A-Z]){1,})(?=(?:.*[a-z]){1,})(?=(?:.*[0-9]){1,})([A-Za-z0-9]{${minLength},})$`,
   );
   return reg;
 }
@@ -85,5 +85,5 @@ function getPasswordValidator(minLength) {
 module.exports = {
   getRegexForGuid,
   getRegexForPitSpot,
-  getPasswordValidator
+  getPasswordValidator,
 };

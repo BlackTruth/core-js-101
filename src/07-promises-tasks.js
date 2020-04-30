@@ -28,11 +28,11 @@
  *                                                    //  Ask her again.';
  */
 function willYouMarryMe(isPositiveAnswer) {
-  return new Promise(function x(resolve, reject) {
+  return new Promise(((resolve, reject) => {
     if (isPositiveAnswer) resolve('Hooray!!! She said "Yes"!');
     if (isPositiveAnswer === false) resolve('Oh no, she said "No".');
     reject(new Error('Wrong parameter is passed! Ask her again.'));
-  });
+  }));
 }
 
 /**
@@ -96,17 +96,15 @@ function getFastestPromise(array) {
  */
 function chainPromises(array, action) {
   return array
-    .reduce((prevPromise, currentPromise) => {
-      return prevPromise.then(all => {
-        return currentPromise.then(b => [...all, b]).catch(() => all);
-      });
-    }, Promise.resolve([]))
-    .then(all => all.reduce(action));
+    .reduce((prevPromise, currentPromise) => prevPromise.then((all) => currentPromise
+      .then((b) => [...all, b]).catch(() => all)),
+    Promise.resolve([]))
+    .then((all) => all.reduce(action));
 }
 
 module.exports = {
   willYouMarryMe,
   processAllPromises,
   getFastestPromise,
-  chainPromises
+  chainPromises,
 };

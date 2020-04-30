@@ -25,7 +25,7 @@ function Rectangle(width, height) {
     height,
     getArea() {
       return width * height;
-    }
+    },
   };
   return rect;
 }
@@ -160,7 +160,7 @@ const cssSelectorBuilder = {
         sClass: 2,
         sAttr: 3,
         sPseudo: 4,
-        sPseudoE: 5
+        sPseudoE: 5,
       };
       this.state = new Array(6).fill(false);
     }
@@ -168,28 +168,31 @@ const cssSelectorBuilder = {
     checkState(i) {
       this.state[i] = true;
       for (let j = i + 1; j < this.state.length; j += 1) {
-        if (this.state[j])
+        if (this.state[j]) {
           throw new Error(
-            'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element'
+            'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element',
           );
+        }
       }
     }
 
     element(v) {
-      if (this.sElement)
+      if (this.sElement) {
         throw new Error(
-          'Element, id and pseudo-element should not occur more then one time inside the selector'
+          'Element, id and pseudo-element should not occur more then one time inside the selector',
         );
+      }
       this.sElement = v;
       this.checkState(this.stateVars.sElement);
       return this;
     }
 
     id(v) {
-      if (this.sId)
+      if (this.sId) {
         throw new Error(
-          'Element, id and pseudo-element should not occur more then one time inside the selector'
+          'Element, id and pseudo-element should not occur more then one time inside the selector',
         );
+      }
       this.sId = v;
       this.checkState(this.stateVars.sId);
       return this;
@@ -214,10 +217,11 @@ const cssSelectorBuilder = {
     }
 
     pseudoElement(v) {
-      if (this.sPseudoE)
+      if (this.sPseudoE) {
         throw new Error(
-          'Element, id and pseudo-element should not occur more then one time inside the selector'
+          'Element, id and pseudo-element should not occur more then one time inside the selector',
         );
+      }
       this.sPseudoE = v;
       this.checkState(this.stateVars.sPseudoE);
       return this;
@@ -228,12 +232,10 @@ const cssSelectorBuilder = {
       if (this.sElement) result += this.sElement;
       if (this.sId) result += `#${this.sId}`;
       if (this.sClass.length > 0) {
-        result += this.sClass.map(c => `.${c}`).join('');
+        result += this.sClass.map((c) => `.${c}`).join('');
       }
-      if (this.sAttr.length > 0)
-        result += this.sAttr.map(a => `[${a}]`).join('');
-      if (this.sPseudo.length > 0)
-        result += this.sPseudo.map(p => `:${p}`).join('');
+      if (this.sAttr.length > 0) result += this.sAttr.map((a) => `[${a}]`).join('');
+      if (this.sPseudo.length > 0) result += this.sPseudo.map((p) => `:${p}`).join('');
       if (this.sPseudoE) result += `::${this.sPseudoE}`;
       return result;
     }
@@ -246,15 +248,13 @@ const cssSelectorBuilder = {
       this.combiner = combiner;
       return this;
     };
-    this.stringify = () => {
-      return `${this.s1.stringify()} ${this.combiner} ${this.s2.stringify()}`;
-    };
-  }
+    this.stringify = () => `${this.s1.stringify()} ${this.combiner} ${this.s2.stringify()}`;
+  },
 };
 
 module.exports = {
   Rectangle,
   getJSON,
   fromJSON,
-  cssSelectorBuilder
+  cssSelectorBuilder,
 };

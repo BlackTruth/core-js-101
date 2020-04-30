@@ -67,7 +67,7 @@ function getPolynom(...args) {
   return function a(x) {
     let y = null;
     let len = args.length - 1;
-    args.forEach(el => {
+    args.forEach((el) => {
       y += el * x ** len;
       len -= 1;
     });
@@ -150,7 +150,7 @@ function retry(func, attempts) {
  */
 function logger(func, logFunc) {
   return function x(...args) {
-    const argsString = args.map(arg => JSON.stringify(arg)).join(',');
+    const argsString = args.map((arg) => JSON.stringify(arg)).join(',');
     const funcString = `${func.name}(${argsString})`;
     logFunc(`${funcString} starts`);
     const result = func(...args);
@@ -211,5 +211,5 @@ module.exports = {
   retry,
   logger,
   partialUsingArguments,
-  getIdGeneratorFunction
+  getIdGeneratorFunction,
 };

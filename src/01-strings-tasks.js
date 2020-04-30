@@ -200,9 +200,9 @@ function extractEmails(str) {
  */
 function getRectangleString(width, height) {
   return (
-    `┌${'─'.repeat(width - 2)}┐\n` +
-    `${`│${' '.repeat(width - 2)}│\n`.repeat(height - 2)}└${'─'.repeat(
-      width - 2
+    `┌${'─'.repeat(width - 2)}┐\n`
+    + `${`│${' '.repeat(width - 2)}│\n`.repeat(height - 2)}└${'─'.repeat(
+      width - 2,
     )}┘\n`
   );
 }
@@ -228,15 +228,14 @@ function encodeToRot13(str) {
   const toChar = String.fromCharCode;
   return str
     .split('')
-    .map(el => {
+    .map((el) => {
       const charCode = el.charCodeAt();
       if (
-        (charCode > 77 && charCode < 91) ||
-        (charCode > 109 && charCode < 123)
-      )
-        return toChar(charCode - 13);
-      if ((charCode > 64 && charCode < 78) || (charCode > 96 && charCode < 110))
-        return toChar(charCode + 13);
+        (charCode > 77 && charCode < 91)
+        || (charCode > 109 && charCode < 123)
+      ) return toChar(charCode - 13);
+      if ((charCode > 64 && charCode < 78)
+        || (charCode > 96 && charCode < 110)) return toChar(charCode + 13);
       return toChar(charCode);
     })
     .join('');
@@ -297,7 +296,7 @@ function getCardId(value) {
     '10',
     'J',
     'Q',
-    'K'
+    'K',
   ];
   const cardTypes = ['♣', '♦', '♥', '♠'];
   const type = value[value.length - 1];
@@ -322,5 +321,5 @@ module.exports = {
   getRectangleString,
   encodeToRot13,
   isString,
-  getCardId
+  getCardId,
 };
