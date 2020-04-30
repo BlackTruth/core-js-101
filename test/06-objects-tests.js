@@ -264,12 +264,12 @@ describe('06-objects-tasks', () => {
       () => builder.pseudoClass('hover').attr('title'),
       () => builder.pseudoElement('after').pseudoClass('valid'),
       () => builder.pseudoElement('after').id('id'),
-    ].forEach((fn) => {
+    ].forEach((fn, i) => {
       assert.throws(
         fn,
         /Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element/,
 
-        '\nPlease throw an exception "Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element" '
+        `\n ${i} -- Please throw an exception "Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element" `
         + 'if selector parts arranged in an invalid order.',
       );
     });

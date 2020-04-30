@@ -593,7 +593,8 @@ describe('03-arrays-tasks', () => {
           { country: 'D', city: '1' },
           { country: 'E', city: '1' },
         ],
-      }, {
+      },
+       {
         arr: [
           { country: '5', city: '1' },
           { country: '1', city: '1' },
